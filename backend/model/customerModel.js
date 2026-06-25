@@ -11,32 +11,10 @@ export const CustomerModel = sequelize.define("CustomerTable", {
     firstName: {
         type: DataTypes.STRING(50),
         allowNull: false,
-        validate:
-        {
-            is: {
-                args: /^[A-Za-z]+([ ][A-Za-z]+)*$/,
-                msg: "Invalid First Name"
-            },
-            len: {
-                args: [3, 50],
-                msg: "First Name must between 3 and 50"
-            }
-        }
     },
     lastName: {
         type: DataTypes.STRING(50),
         allowNull: false,
-        validate:
-        {
-            is: {
-                args: /^[A-Za-z]+([ .][A-Za-z]+)*$/,
-                msg: "Invalid Last Name"
-            },
-            len: {
-                args: [1, 50],
-                msg: "Last Name must between 1 and 50"
-            }
-        }
     },
     dob: {
         type: DataTypes.DATEONLY,
@@ -46,13 +24,11 @@ export const CustomerModel = sequelize.define("CustomerTable", {
         type: DataTypes.STRING(253),
         allowNull: false,
         unique: true,
-        validate: { is: { args: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/, msg: "Invalid Email" } }
     },
     mobile: {
         type: DataTypes.STRING(16),
         allowNull: false,
         unique: true,
-        validate: { is: { args: /^\+\d{12,16}$/, msg: "Invalid Mobile" } }
     },
     password: {
         type: DataTypes.STRING,
