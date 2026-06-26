@@ -1,8 +1,8 @@
 {
   "development": {
     "username": "root",
-    "password": null,
-    "database": "database_test",
+    "password": "Ram15San02@",
+    "database": "CD_Bank",
     "host": "127.0.0.1",
     "dialect": "mysql"
   },
