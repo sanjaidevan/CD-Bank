@@ -1,14 +1,15 @@
-import bcrypt from "bcrypt";
-import { getCustomerById } from "../Services/customer.services.js";
+import { fetchCustomerById } from "../Services/customer.services.js";
+import bcrypt from 'bcrypt';
 
 export const customerAuthentication = async (req, res, next) => {
     try {
         const { customerID, password } = req.body;
-        const customer = await getCustomerById(customerID);
-        const authentication = await bcrypt.compare(password, customer.password)
-        if (authentication) { return res.status(200).json({ message: "Customer Login Successfull" }) };
-        return res.status(404).json({ message: "Customer Login Failed" });
-        console.log(customer)
+        const customer = await fetchCustomerById(customerID);
+        if (!customer) { return res.status(404).json({ message: "Customer not found" }); }
+        const authenticated = await bcrypt.compare(password, customer.password);
+        if (!authenticated) { return res.status(401).json({ message: "Invalid password" }); }
+        req.customer = customer;
+        next();
     } catch (error) {
         next(error);
     }

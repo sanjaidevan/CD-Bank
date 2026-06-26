@@ -21,12 +21,25 @@ export const TransactionModel = sequelize.define("TransactionTable", {
     },
     transaction_status: {
         type: DataTypes.ENUM("initiated", "pending", "completed", "failed"),
-        allowNull: false
+        allowNull: false,
+        defaultValue:"completed",
     },
     balance:
     {
         type: DataTypes.INTEGER,
         allowNull: false
+    },
+    amt_transfer: { //Added amount transfer
+        type: DataTypes.INTEGER,
+        allowNull: false,
+    },
+    acc_num: { //Added this column because as FK from acc_tbl,
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references:{
+            model:"acc_tbl",
+            key:"acc_num"
+        }
     },
 }, {
     tableName: "transaction_tbl",

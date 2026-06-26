@@ -19,6 +19,11 @@ export const AccountModel = sequelize.define("AccountTable", {
         type: DataTypes.STRING,
         allowNull: false,
     },
+    customer_id: {  // Added this column because of sqlMessage: "Field 'customer_id' doesn't have a default value",
+
+        type: DataTypes.UUID,
+        allowNull: false,
+    },
 },
     {
         tableName: "acc_tbl"

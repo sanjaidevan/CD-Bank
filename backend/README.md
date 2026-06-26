@@ -231,3 +231,4 @@ Customer
 * Provides a clear hierarchy of customers, accounts, and transactions within the banking system.
 
 These associations form the core data structure of the CD Bank backend and enable efficient management of customer accounts and transaction histories.
+

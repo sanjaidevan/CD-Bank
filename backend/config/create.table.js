@@ -15,4 +15,5 @@ export async function createTable(reCreateTable) {
         AccountModel.sync();
         TransactionModel.sync();
     }
+    
 };
