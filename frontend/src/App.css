@@ -127,7 +127,7 @@
 }
 
 .loginBtn {
-  background: #078BAAFF;
+  background: #078BAAFF !important;
   border: none;
   height: 58px;
   font-size: 1.1rem;
@@ -135,7 +135,7 @@
 }
 
 .loginBtn:hover {
-  background: #007899;
+  background: #032129;
 }
 
 /* RESPONSIVE */
