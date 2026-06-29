@@ -3,7 +3,6 @@ import bcrypt from 'bcrypt';
 
 export const customerAuthentication = async (req, res, next) => {
     try {
-        // Changed from 'customerID' to 'customerID'
         const { customerID, password } = req.body;
 
         if (!customerID || !password) {

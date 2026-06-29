@@ -19,9 +19,9 @@ export const fetchTransactions = async (account_num) => {
 };
 
 export const fetchLatestTransaction = async (account_num) => {
-    console.log("🚀 ~ fetchLatestTransaction ~ account_num:", account_num);
+    // console.log("🚀 ~ fetchLatestTransaction ~ account_num:", account_num); Removed all the logs
     const transaction = await TransactionModel.findOne({ where: { acc_num: account_num }, order: [["transaction_date", "DESC"]] });
-    console.log("🚀 ~ fetchLatestTransaction ~ transaction:", transaction);
+    // console.log("🚀 ~ fetchLatestTransaction ~ transaction:", transaction);
     return transaction;
 };
 

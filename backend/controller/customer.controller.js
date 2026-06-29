@@ -16,10 +16,10 @@ export const getAccountDetails = async (req, res, next) => {
         const accountHolder = req.customer; //customer fetched from the previous middleware
         const accounts = await fetchCustomerAccount(accountHolder.customer_id);
         const getAccountDetails = await accounts.map(async (acc) => {
-            console.log("🚀 ~ getAccountDetails ~ acc:", acc)
-            console.log("🚀 ~ getAccountDetails ~ acc.AccountTable.dataValues:", acc.dataValues.acc_num);
+            // console.log("🚀 ~ getAccountDetails ~ acc:", acc);
+            // console.log("🚀 ~ getAccountDetails ~ acc.AccountTable.dataValues:", acc.dataValues.acc_num);
             const lastTransaction = await fetchLatestTransaction(acc.dataValues.acc_num);
-            console.log("🚀 ~ getAccountDetails ~ lastTransaction:", lastTransaction);
+            // console.log("🚀 ~ getAccountDetails ~ lastTransaction:", lastTransaction);
             const balance = lastTransaction ? lastTransaction.balance : 0; 
             return {
                 acc_num: acc.acc_num,
@@ -30,7 +30,7 @@ export const getAccountDetails = async (req, res, next) => {
             };
         });
         const accountDetails = await Promise.all(getAccountDetails);
-        console.log(accountDetails);
+        // console.log(accountDetails); Removed all logs
         return res.status(200).json({ customerName: accountHolder.firstName, accounts: accountDetails, });
     } catch (error) {
         next(error);

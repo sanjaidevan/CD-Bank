@@ -2,7 +2,7 @@ import { Navbar, Container, Button } from "react-bootstrap";
 import logo from "../assets/CDlogo.png";
 import "../styles/CustomerNavbar.css";
 
-function CustomerNavbar({ customerName, onLogout }) {
+function CustomerNavbar({ onLogout }) {
   return (
     <Navbar bg="white" expand="lg" className="customerNavbar shadow-sm">
       <Container fluid>

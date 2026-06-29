@@ -5,7 +5,7 @@
 }
 
 .loginPage {
-  overflow: hidden;
+  overflow: visible;
 }
 
 /* LEFT SIDE */
@@ -127,7 +127,7 @@
 }
 
 .loginBtn {
-  background: #0087a8;
+  background: #078BAAFF;
   border: none;
   height: 58px;
   font-size: 1.1rem;
@@ -172,6 +172,28 @@
   }
 }
 
+.btn-statement{
+  background-color: #078BAAFF !important;
+}
+
+.accountHeader{
+  font-weight: bold;
+}
+
+.sideBar{
+  background: #F9FBFC !important;
+}
+.balance{
+  color: #236FE8;
+}
+
+.accordion,.accordion-item{
+  border: none !important;
+}
+.accordion-button{
+  background-color: #fff !important;
+}
+
 .list-group-item.menuItem {
   font-size: large;
   font-weight: 600;
@@ -181,7 +203,7 @@
   background-color: #fff;
   color: #f37021;
   border-color: #f37021;
-  border-inline-end: 2px solid #f37021;
+  border-inline-end: 5px solid #f37021;
   border-bottom: none;
   border-top: none;
 }
