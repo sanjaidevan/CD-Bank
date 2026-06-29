@@ -1,5 +1,6 @@
 import {
     fetchCustomerAccount,
+    fetchLatestTransaction,
     fetchTransactions,
     newTransaction,
 } from "../Services/customer.services.js";
@@ -14,17 +15,23 @@ export const getAccountDetails = async (req, res, next) => {
     try {
         const accountHolder = req.customer; //customer fetched from the previous middleware
         const accounts = await fetchCustomerAccount(accountHolder.customer_id);
-        const accountDetails = accounts.map(
-            ({ acc_num, acc_type, branch, ifc }) => ({
-                acc_num,
-                acc_type,
-                branch,
-                ifc,
-            }),
-        );
-
-        accountDetails.unshift(accountHolder.firstName);
-        return res.status(200).json(accountDetails);
+        const getAccountDetails = await accounts.map(async (acc) => {
+            console.log("🚀 ~ getAccountDetails ~ acc:", acc)
+            console.log("🚀 ~ getAccountDetails ~ acc.AccountTable.dataValues:", acc.dataValues.acc_num);
+            const lastTransaction = await fetchLatestTransaction(acc.dataValues.acc_num);
+            console.log("🚀 ~ getAccountDetails ~ lastTransaction:", lastTransaction);
+            const balance = lastTransaction ? lastTransaction.balance : 0; 
+            return {
+                acc_num: acc.acc_num,
+                acc_type: acc.acc_type,
+                branch: acc.branch,
+                ifc: acc.ifc,
+                balance,
+            };
+        });
+        const accountDetails = await Promise.all(getAccountDetails);
+        console.log(accountDetails);
+        return res.status(200).json({ customerName: accountHolder.firstName, accounts: accountDetails, });
     } catch (error) {
         next(error);
     }
@@ -32,7 +39,7 @@ export const getAccountDetails = async (req, res, next) => {
 
 export const getTransactions = async (req, res, next) => {
     try {
-        const account_holder = req.customer;
+        const account_holder = req.customer; //customer fetched from the previous middleware
         const { accType } = req.body;
         if (!accountTypeCheck(accType)) {
             return res.status(400).json({ message: "Invalid Account Type" });
@@ -45,7 +52,7 @@ export const getTransactions = async (req, res, next) => {
         const all_transactions = await fetchTransactions(account.acc_num);
         // const transactions = all_transactions.sort(
         //     (a, b) => new Date(b.transaction_date) - new Date(a.transaction_date),
-        // );
+        // ); Tested sorting to sort the transactions based on the date
         return res.status(200).json(all_transactions);
     } catch (error) {
         next(error);

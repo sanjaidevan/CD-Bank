@@ -6,6 +6,7 @@
 
 .loginPage {
   overflow: hidden;
+
 }
 
 /* LEFT SIDE */
@@ -37,7 +38,7 @@
   margin: 0;
 }
 
-.welcomeText span {
+span {
   color: #f37021;
 }
 
@@ -58,56 +59,55 @@
   border: none;
   border-radius: 18px;
   padding: 30px;
-  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.08);
-  * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    font-family: Poppins, sans-serif;
-  }
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.08);* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
 
-  .loginForm {
-    background: #e5fcff;
-  }
+.loginForm {
+  background: #e5fcff;
+}
 
+.welcomeSection {
+  padding-left: 80px;
+}
+
+.welcomeText {
+  font-size: 4rem;
+  font-weight: 700;
+  line-height: 1.2;
+  color: #1f2937;
+}
+
+.welcomeText span {
+  color: #0d6efd;
+}
+
+.loginCard {
+  width: 100%;
+  max-width: 420px;
+  padding: 15px;
+  border: none;
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+@media (max-width: 768px) {
   .welcomeSection {
-    padding-left: 80px;
+    padding: 40px;
+    text-align: center;
   }
 
   .welcomeText {
-    font-size: 4rem;
-    font-weight: 700;
-    line-height: 1.2;
-    color: #1f2937;
-  }
-
-  .welcomeText span {
-    color: #0d6efd;
+    font-size: 2.8rem;
   }
 
   .loginCard {
-    width: 100%;
-    max-width: 420px;
-    padding: 15px;
-    border: none;
-    border-radius: 16px;
-    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+    margin: 20px;
   }
-
-  @media (max-width: 768px) {
-    .welcomeSection {
-      padding: 40px;
-      text-align: center;
-    }
-
-    .welcomeText {
-      font-size: 2.8rem;
-    }
-
-    .loginCard {
-      margin: 20px;
-    }
-  }
+}
 }
 
 .loginTitle {
@@ -170,48 +170,4 @@
   .loginCard {
     margin: 30px 15px;
   }
-}
-
-.list-group-item.menuItem {
-  font-size: large;
-  font-weight: 600;
-}
-
-.list-group-item.active.menuItem {
-  background-color: #fff;
-  color: #f37021;
-  border-color: #f37021;
-  border-inline-end: 2px solid #f37021;
-  border-bottom: none;
-  border-top: none;
-}
-
-.sectionTitle {
-  font-size: 1.5rem;
-  font-weight: 500;
-}
-
-.accountHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  width: 100%;
-  border: none;
-}
-
-.statement-modal .modal-dialog {
-  overflow: visible;
-}
-
-.btn-close-statement{
-  position: absolute;
-  top: -20px;
-  right: -20px;
-  z-Index: 2;
-  width: 40px;
-  height: 40px;
-  background: #fff;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.5);
 }

@@ -18,6 +18,13 @@ export const fetchTransactions = async (account_num) => {
     return transactions;
 };
 
+export const fetchLatestTransaction = async (account_num) => {
+    console.log("🚀 ~ fetchLatestTransaction ~ account_num:", account_num);
+    const transaction = await TransactionModel.findOne({ where: { acc_num: account_num }, order: [["transaction_date", "DESC"]] });
+    console.log("🚀 ~ fetchLatestTransaction ~ transaction:", transaction);
+    return transaction;
+};
+
 export const newTransaction = async (new_transaction) => {
     const transaction = await TransactionModel.create(new_transaction);
     return transaction;
