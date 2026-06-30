@@ -1,13 +1,14 @@
 import { DataTypes, DATE } from "sequelize";
-import { sequelize } from "../config/dbConnect.js";
+import { sequelize } from "../db/config.js";
 
 
 export const TransactionModel = sequelize.define("TransactionTable", {
-    transaction_id: {
-        type: DataTypes.STRING,
-        primaryKey: true
+    id: {
+        type: DataTypes.UUID,
+        primaryKey: true,
+        defaultValue:DataTypes.UUID
     },
-    transaction_date: {
+    transactionDate: {
         type: DataTypes.DATE,
         allowNull: false,
         defaultValue: DataTypes.NOW
@@ -15,32 +16,32 @@ export const TransactionModel = sequelize.define("TransactionTable", {
     description: {
         type: DataTypes.STRING,
     },
-    transaction_type: {
+    transactionType: {
         type: DataTypes.ENUM("debit", "credit"),
         allowNull: false
     },
-    transaction_status: {
+    transactionStatus: {
         type: DataTypes.ENUM("initiated", "pending", "completed", "failed"),
         allowNull: false,
-        defaultValue:"completed",
+        defaultValue: "pending",
     },
-    balance:
+    closingBalance:
     {
         type: DataTypes.INTEGER,
         allowNull: false
     },
-    amt_transfer: { //Added amount transfer
-        type: DataTypes.INTEGER,
+    transferAmount: { //Added amount transfer
+        type: DataTypes.FLOAT,
         allowNull: false,
     },
-    acc_num: { //Added this column because as FK from acc_tbl,
+    accountNumber: { //Added this column because as FK from acc_tbl,
         type: DataTypes.INTEGER,
         allowNull: false,
-        references:{
-            model:"acc_tbl",
-            key:"acc_num"
+        references: {
+            model: "accountsTable",
+            key: "accountNumber"
         }
     },
 }, {
-    tableName: "transaction_tbl",
+    tableName: "transactionTable", //Table name Changed
 });
