@@ -1,15 +1,17 @@
 import axiosInstance from "../services/axiosInstance";
 
-export const getCustomer = (formData) =>
-  axiosInstance.post("/",formData);
-
-export const getCustomerAccounts = (formData) => {
-  return axiosInstance.post("/", formData);
+export const getCustomer = (formData) => {
+  return axiosInstance.post("/login", formData);
 };
 
-export const transferFund = (formData)=>{
-  return axiosInstance.post("/transferfund",formData)
+export const getCustomerAccounts = () => {
+  return axiosInstance.get("/");
 };
 
-export const getAccountStatement = (account) =>
-  axiosInstance.post("/statements", account);
+export const transferFund = (formData) => {
+  return axiosInstance.post("/transferfund", formData)
+};
+
+export const getAccountStatement = (accountNumber) => {
+  return axiosInstance.get(`/statements/${accountNumber}`);
+};

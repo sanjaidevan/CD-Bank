@@ -1,4 +1,4 @@
-// components/CustomerAccounts.jsx
+// components/acc_num.jsx
 import {
   Container,
   Row,
@@ -8,6 +8,7 @@ import {
   Accordion,
   Button,
   Form,
+  FormLabel,
 } from "react-bootstrap";
 import CustomerNavbar from "./CustomerNavbar";
 
@@ -17,17 +18,9 @@ function CustomerAccounts({
   activeMenu,
   onMenuChange,
   onLogout,
-  transferForm,
-  onTransferChange,
-  onTransferSubmit,
-  onTransferReset,
-  submitting,
   onViewStatement,
+  transferContent
 }) {
-  const selectedSourceAccount = accounts?.find(
-    (acc) => acc.acc_type === transferForm.sourceAccType,
-  );
-
   return (
     <>
       <CustomerNavbar onLogout={onLogout} />
@@ -66,14 +59,14 @@ function CustomerAccounts({
                     {accounts?.map((account, index) => (
                       <Accordion.Item
                         eventKey={index.toString()}
-                        key={account.acc_num}
+                        key={account.accountNumber}
                         className="mb-3"
                       >
                         <Accordion.Header>
                           <div className="accountHeader">
                             <span className="accountName">
-                              {account.acc_type.charAt(0).toUpperCase() +
-                                account.acc_type.slice(1)}{" "}
+                              {account.accountType.charAt(0).toUpperCase() +
+                                account.accountType.slice(1)}{" "}
                               Account
                             </span>
                             <span className="fw-bold">
@@ -89,14 +82,14 @@ function CustomerAccounts({
                           <Row>
                             <Col>
                               <strong>Account Number :</strong>{" "}
-                              {account.acc_num}
+                              {account.accountNumber}
                               <br />
                               <strong>Name:</strong> {customerName}
                             </Col>
                             <Col>
                               <strong>Branch :</strong> {account.branch}
                               <br />
-                              <strong>IFSC :</strong> {account.ifc}
+                              <strong>IFSC :</strong> {account.ifsc}
                             </Col>
                             <Col className="text-end mt-2">
                               <Button onClick={() => onViewStatement(account)} className="btn-statement">
@@ -111,122 +104,7 @@ function CustomerAccounts({
                 </>
               )}
 
-              {activeMenu === "transfer" && (
-                <>
-                  <p className="sectionTitle">Transfer Funds</p>
-                  <div className="p-4">
-                    <Form onSubmit={onTransferSubmit}>
-                      <Row>
-                        <Col md={6} className="py-md-3">
-                          <Form.Label>From Account</Form.Label>
-                        </Col>
-                        <Col md={6} className="py-md-3">
-                          <Form.Select
-                            name="sourceAccType"
-                            value={transferForm.sourceAccType}
-                            onChange={onTransferChange}
-                            required
-                          >
-                            <option value="" disabled>
-                              -- Choose Account --
-                            </option>
-                            {accounts.map((acc) => (
-                              <option key={acc.acc_num} value={acc.acc_type}>
-                                {acc.acc_type} - {acc.acc_num}
-                              </option>
-                            ))}
-                          </Form.Select>
-                          {selectedSourceAccount && (
-                            <Form.Text className="text-muted my-5">
-                              Account Number: {selectedSourceAccount.acc_num}
-                            </Form.Text>
-                          )}
-                        </Col>
-
-                        {/* Beneficiary Account */}
-                        <Col md={6} className="py-md-3">
-                          <Form.Label>Beneficiary Account (To)</Form.Label>
-                        </Col>
-                        <Col md={6} className="py-md-3">
-                          <Form.Select
-                            name="beneficiaryAccNum"
-                            value={transferForm.beneficiaryAccNum}
-                            onChange={onTransferChange}
-                            required
-                          >
-                            <option value="" disabled>
-                              -- Choose Beneficiary --
-                            </option>
-                            {accounts
-                              .filter(
-                                (acc) =>
-                                  acc.acc_type !== transferForm.sourceAccType,
-                              )
-                              .map((acc) => (
-                                <option key={acc.acc_num} value={acc.acc_num}>
-                                  {acc.acc_type} - {acc.acc_num}
-                                </option>
-                              ))}
-                          </Form.Select>
-                          <Form.Text className="text-muted">
-                            Select the destination account from your own
-                            accounts.
-                          </Form.Text>
-                        </Col>
-
-                        {/* Amount */}
-                        <Col md={6} className="py-md-3">
-                          <Form.Label>Amount (₹)</Form.Label>
-                        </Col>
-                        <Col md={6}>
-                          <Form.Control
-                            type="number"
-                            name="amount"
-                            placeholder="Enter amount"
-                            value={transferForm.amount}
-                            onChange={onTransferChange}
-                            min="1"
-                            step="0.01"
-                            required
-                          />
-                        </Col>
-
-                        {/* Remarks */}
-                        <Col md={6} className="py-md-3">
-                          <Form.Label>Remarks (Optional)</Form.Label>
-                        </Col>
-                        <Col md={6} className="py-md-3">
-                          <Form.Control
-                            as="textarea"
-                            rows={2}
-                            name="remarks"
-                            placeholder="Add a note..."
-                            value={transferForm.remarks}
-                            onChange={onTransferChange}
-                          />
-                        </Col>
-
-                        <div className="d-flex gap-2">
-                          <Button
-                            variant="primary"
-                            type="submit"
-                            disabled={submitting}
-                          >
-                            {submitting ? "Processing..." : "Transfer Now"}
-                          </Button>
-                          <Button
-                            variant="outline-secondary"
-                            type="button"
-                            onClick={onTransferReset}
-                          >
-                            Reset
-                          </Button>
-                        </div>
-                      </Row>
-                    </Form>
-                  </div>
-                </>
-              )}
+              {activeMenu === "transfer" && transferContent}
             </Col>
           </Row>
         </Card>

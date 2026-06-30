@@ -7,13 +7,17 @@ function CustomerLogin() {
   const navigate = useNavigate();
   const handleSubmit = async (formData) => {
     try {
+      // const response = await getCustomer(formData);
+      // localStorage.setItem("customerCredentials", JSON.stringify(formData));
       const response = await getCustomer(formData);
-      localStorage.setItem("customerCredentials", JSON.stringify(formData));
+      const { token, customer } = response.data;
+      localStorage.setItem("authToken", token);
+      localStorage.setItem("customer", JSON.stringify(customer));
       toast.success("Login Successfull");
-      navigate("/customer");
+      navigate("/customer",{replace:true});
     } catch (error) {
       toast.error(error.message);
-      console.log(error);
+      console.error(error);
     }
   };
   return (

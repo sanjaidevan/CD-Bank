@@ -11,6 +11,7 @@ import {
 } from "react-bootstrap";
 import { useState } from "react";
 import logo from "../assets/CDlogo.png";
+import '../styles/CustomerLogin.css';
 
 function CustomerLoginForm({ onSubmit }) {
   const [formData, setFormData] = useState({

@@ -5,8 +5,7 @@
 }
 
 .loginPage {
-  overflow: hidden;
-
+  overflow: visible;
 }
 
 /* LEFT SIDE */
@@ -38,7 +37,7 @@
   margin: 0;
 }
 
-span {
+.welcomeText span {
   color: #f37021;
 }
 
@@ -59,61 +58,62 @@ span {
   border: none;
   border-radius: 18px;
   padding: 30px;
-  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.08);* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
-}
+  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.08);
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Poppins, sans-serif;
+  }
 
-.loginForm {
-  background: #e5fcff;
-}
+  .loginForm {
+    background: #e5fcff;
+  }
 
-.welcomeSection {
-  padding-left: 80px;
-}
-
-.welcomeText {
-  font-size: 4rem;
-  font-weight: 700;
-  line-height: 1.2;
-  color: #1f2937;
-}
-
-.welcomeText span {
-  color: #0d6efd;
-}
-
-.loginCard {
-  width: 100%;
-  max-width: 420px;
-  padding: 15px;
-  border: none;
-  border-radius: 16px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
-}
-
-@media (max-width: 768px) {
   .welcomeSection {
-    padding: 40px;
-    text-align: center;
+    padding-left: 80px;
   }
 
   .welcomeText {
-    font-size: 2.8rem;
+    font-size: 4rem;
+    font-weight: 700;
+    line-height: 1.2;
+    color: #1f2937;
+  }
+
+  .welcomeText span {
+    color: #0d6efd;
   }
 
   .loginCard {
-    margin: 20px;
+    width: 100%;
+    max-width: 420px;
+    padding: 15px;
+    border: none;
+    border-radius: 16px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
   }
-}
+
+  @media (max-width: 768px) {
+    .welcomeSection {
+      padding: 40px;
+      text-align: center;
+    }
+
+    .welcomeText {
+      font-size: 2.8rem;
+    }
+
+    .loginCard {
+      margin: 20px;
+    }
+  }
 }
 
 .loginTitle {
   color: #184d74;
-  font-weight: 600;
-  margin-bottom: 50px;
+  font-weight:  800;
+  margin-bottom: 30px; /* Changed margin-bottom */
 }
 
 .form-label {
@@ -127,7 +127,7 @@ span {
 }
 
 .loginBtn {
-  background: #0087a8;
+  background: #078BAAFF !important;
   border: none;
   height: 58px;
   font-size: 1.1rem;
@@ -135,7 +135,7 @@ span {
 }
 
 .loginBtn:hover {
-  background: #007899;
+  background: #032129;
 }
 
 /* RESPONSIVE */
