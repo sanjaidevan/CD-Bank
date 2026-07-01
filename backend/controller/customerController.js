@@ -1,15 +1,13 @@
 import {
     fetchCustomerAccount,
+    fetchCustomerAccounts,
     fetchLatestTransaction,
     fetchTransactions,
-    newTransaction,
+    newTransactionProcess,
 } from "../services/customerServices.js";
 import { randomUUID } from "crypto";
+import { validateFundTransferDetails } from "../utils/inputValidation.js";
 
-
-function accountTypeCheck(accountNumber) {
-    return accountNumber && isNaN(accountNumber);
-}
 
 //Get Request Task Completed
 export const getUser = async (req, res, next) => {
@@ -26,23 +24,9 @@ export const getUser = async (req, res, next) => {
 
 export const getAccountDetails = async (req, res, next) => {
     try {
-        const accountHolder = req.body; //customer fetched from the previous middleware
-        // console.log(accountHolder);
-        const accounts = await fetchCustomerAccount(accountHolder.customerID);
-        console.log(accounts);
-        // const getAccountDetails = await accounts.map(async (acc) => {
-        //     const lastTransaction = await fetchLatestTransaction(acc.dataValues.accountNumber);
-        //     const balance = lastTransaction ? lastTransaction.balance : 0;
-        //     return {
-        //         accountNumber: acc.accountNumber,
-        //         accountType: acc.accountType,
-        //         branch: acc.branch,
-        //         ifc: acc.ifc,
-        //         balance,
-        //     };
-        // });
-        // const accountDetails = await Promise.all(getAccountDetails);
-        // console.log(accountDetails); 
+        const accountHolder = req.customer; //customer fetched from the previous middleware
+        const accounts = await fetchCustomerAccounts(accountHolder.customerID);
+        if (accounts.length == 0) return res.status(404).json({ message: "No Accounts Found" });
         return res.status(200).json({ customerName: accountHolder.firstName, accounts, });
     } catch (error) {
         next(error);
@@ -51,22 +35,10 @@ export const getAccountDetails = async (req, res, next) => {
 
 export const getTransactions = async (req, res, next) => {
     try {
-        const accountHolder = req.body; //customer fetched from the previous middleware
         const accountNumber = Number(req.params.accountNumber);
-        // console.log(JSON.parse(req.params.accountNumber));
-        console.log(accountNumber);
-        // if (!accountTypeCheck(accountNumber)) {
-        //     return res.status(400).json({ message: "Invalid Account Number" });
-        // }
-        const allTransactions = await fetchTransactions(accountNumber);
-        console.log(allTransactions);
-        if (allTransactions.length == 0) {
-            console.log("No Transactions Found");
-            return res.status(404).json({ message: "No Transactions Found" });
-        }
-        // const transactions = allTransactions.sort(
-        //     (a, b) => new Date(b.transactionDate) - new Date(a.transactionDate),
-        // ); Tested sorting to sort the transactions based on the date
+        const accountHolder = req.customer;
+        const allTransactions = await fetchTransactions(accountNumber, accountHolder.customerID);
+        if (allTransactions.length == 0) return res.status(404).json({ message: "No Transactions Found" });
         return res.status(200).json(allTransactions);
     } catch (error) {
         next(error);
@@ -75,29 +47,16 @@ export const getTransactions = async (req, res, next) => {
 
 export const amountTransfer = async (req, res, next) => {
     try {
-        const senderAccount = req.body;
-        const { reciver_Account, accType, amount_transfer, remarks } = req.body;
-        if (!accountTypeCheck(accType)) {
-            return res.status(400).json({ message: "Invalid Account Type" });
-        }
-        const senderAccounts = await fetchCustomerAccount(
-            senderAccount.customer_id,
-        );
-        const account = senderAccounts.find((acc) => acc.accountType === accType);
-        if (!account) {
-            return res.status(404).json({ message: "No Accounts Found" });
-        }
-        const allTransactions = await fetchTransactions(account.accountNumber);
-        // const transactions = allTransactions.sort(
-        //     (a, b) => new Date(b.transactionDate) - new Date(a.transactionDate),
-        // );
-        if (allTransactions[0].balance < amount_transfer) {
-            return res.status(404).json({ message: "Insufficent balance" });
-        }
-        const new_balance = allTransactions[0].balance - amount_transfer;
-        console.log
-        const new_transaction = { transaction_id: randomUUID(), description: remarks, balance: new_balance, amt_transfer: amount_transfer, accountNumber: account.accountNumber, "transaction_type": "debit" }
-        const transaction = await newTransaction(new_transaction);
+        const { customerID } = req.customer;
+        const { accountNumber, reciverAccount, amountTransfer, remarks } = req.body;
+        const checkDatatype = validateFundTransferDetails(accountNumber, reciverAccount, amountTransfer);
+        if (checkDatatype === false) return res.status(422).json({ message: "Type error please check all the inputs" });
+        const account = await fetchCustomerAccount(accountNumber, customerID);
+        if (account.length == 0) return res.status(404).json({ message: "No accounts Found" });
+        const newBalance = account.balance - amountTransfer;
+        const newTransaction = { id: randomUUID(), description: remarks, closingBalance: newBalance, transferAmount: amountTransfer, accountNumber: account.accountNumber, transactionType: "debit", transactionStatus: "Completed", customerId: customerID }
+        const transaction = await newTransactionProcess(newTransaction);
+        //Balance in Account is updated
         return res.status(200).json({ message: "Transaction successfully" });
     } catch (error) {
         next(error);

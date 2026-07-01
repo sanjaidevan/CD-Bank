@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Col, Form, FormLabel, Row, Button } from "react-bootstrap";
 
 function TransferFund({
@@ -8,8 +9,14 @@ function TransferFund({
   onReset,
   submitting,
 }) {
-  const selectedSourceAccount = accounts?.find(
-    (account) => account.accountType === transferForm.sourceAccType,
+
+  const [myAccounts, setAccounts] = useState("");
+  useEffect(() => {
+    setAccounts({ accounts });
+  }, [accounts]);
+
+  const selectedSourceAccount = myAccounts?.accounts?.find(
+    (account) => account?.accountNumber === transferForm?.sourceAccountNumber,
   );
   return (
     <>
@@ -22,18 +29,16 @@ function TransferFund({
             </Col>
             <Col md={6} className="py-md-3">
               <Form.Select
-                name="sourceAccType"
-                value={transferForm.sourceAccType}
-                onChange={(e) => {
-                  onChange(e);
-                }}
+                name="sourceAccountNumber"
+                value={transferForm.sourceAccountNumber}
+                onChange={onChange}
                 required
               >
                 <option value="" disabled>
                   -- Choose Account --
                 </option>
                 {accounts.map((acc) => (
-                  <option key={acc.accountNumber} value={acc.accountType}>
+                  <option key={acc.accountNumber} value={acc.accountNumber}>
                     {acc.accountType} - {acc.accountNumber}
                   </option>
                 ))}
@@ -51,8 +56,8 @@ function TransferFund({
             </Col>
             <Col md={6} className="py-md-3">
               <Form.Select
-                name="beneficiaryAccNum"
-                value={transferForm.beneficiaryAccNum}
+                name="beneficiaryAccountNumber"
+                value={transferForm.beneficiaryAccountNumber}
                 onChange={onChange}
                 required
               >
@@ -60,10 +65,17 @@ function TransferFund({
                   -- Choose Beneficiary --
                 </option>
                 {accounts
-                  .filter((acc) => acc.accountType !== transferForm.sourceAccType)
-                  .map((acc) => (
-                    <option key={acc.accountNumber} value={acc.accountNumber}>
-                      {acc.accountType} - {acc.accountNumber}
+                  .filter(
+                    (account) =>
+                      account.accountNumber !==
+                      transferForm.sourceAccountNumber,
+                  )
+                  .map((account) => (
+                    <option
+                      key={account.accountNumber}
+                      value={account.accountNumber}
+                    >
+                      {account.accountType} - {account.accountNumber}
                     </option>
                   ))}
               </Form.Select>

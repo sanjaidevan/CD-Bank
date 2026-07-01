@@ -1,17 +1,24 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { validateTransferForm } from "../utils/validateTransfer";
 import { toast } from "react-toastify";
 import { transferFund } from "../api/customerApi";
 
-function AmountTransfer(accounts,navigate) {
-  
+function AmountTransfer(accounts, navigate) {
   //Create a Use State for transferfund default all the property value is null
   const [transferForm, setTransferForm] = useState({
-    sourceAccType: accounts.accType||"",
-    beneficiaryAccNum: "",
+    sourceAccountNumber: "",
+    beneficiaryAccountNumber: "",
     amount: "",
     remarks: "",
   });
+  useEffect(() => {
+    setTransferForm({
+      sourceAccountNumber: accounts[0]?.accountNumber || "",
+      beneficiaryAccountNumber: "",
+      amount: "",
+      remarks: "",
+    });
+  }, [accounts]);
 
   //Another useSate that for check the submitting by default it set as false
   const [submitting, setSubmitting] = useState(false);
@@ -25,8 +32,8 @@ function AmountTransfer(accounts,navigate) {
   //It handles the Transfer Form reset the details
   const handleTransferReset = () => {
     setTransferForm({
-      sourceAccType: "",
-      beneficiaryAccNum: "",
+      sourceAccountNumber: "",
+      beneficiaryAccountNumber: "",
       amount: "",
       remarks: "",
     });
@@ -35,45 +42,28 @@ function AmountTransfer(accounts,navigate) {
   //It handles the form submission
   const handleTransferSubmit = async (event) => {
     event.preventDefault();
-    const { sourceAccType, beneficiaryAccNum, amount, remarks } = transferForm;
+    const { sourceAccountNumber, beneficiaryAccountNumber, amount, remarks } =
+      transferForm;
 
     //Validate the form details
     const validationError = validateTransferForm({
-      sourceAccType,
-      beneficiaryAccNum,
+      sourceAccountNumber,
+      beneficiaryAccountNumber,
       amount,
     });
 
     if (validationError) {
       return toast.error(validationError);
     }
-
-    //Reject transfer to same Account
-    const sourceAccount = accounts.find(
-      (account) => account.accountType === sourceAccType,
-    );
-    if (sourceAccount && sourceAccount.accountNumber === beneficiaryAccNum) {
-      return toast.error("Cannot Transfer Amount to Same Account");
-    }
     //Set Form submitting true
     setSubmitting(true);
     try {
       //Get the Customer Credentials from local Storage
-      const credentials = JSON.parse(
-        localStorage.getItem("customerCredentials"),
-      );
-      if (!credentials) {
-        toast.error("Session expired. Please Login");
-        navigate("/");
-        return;
-      }
       await transferFund({
-        accType: sourceAccType,
-        reciver_Account: beneficiaryAccNum,
+        accountNumber: parseInt(sourceAccountNumber),
+        reciverAccount: parseInt(beneficiaryAccountNumber),
         remarks: remarks || "",
-        amount_transfer:parseFloat(amount),
-        customerID: credentials.customerID,
-        password: credentials.password,
+        amountTransfer: parseFloat(amount),
       });
       toast.success("Transfer successfull");
       handleTransferReset();

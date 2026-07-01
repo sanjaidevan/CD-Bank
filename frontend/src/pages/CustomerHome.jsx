@@ -18,6 +18,28 @@ function CustomerHome() {
   const [customerName, setCustomerName] = useState("");
   const [accounts, setAccounts] = useState([]);
   const [activeMenu, setActiveMenu] = useState("summary");
+  
+  const [statementModal, setStatementModal] = useState({
+    show: false,
+    account: null,
+    transactions: [],
+  });
+  
+  useEffect(() => {
+    fetchAccounts();
+  }, []);
+  
+  const fetchAccounts = async () => {
+    try {
+      const response = await getCustomerAccounts();
+      const { customerName, accounts } = response.data;
+      setCustomerName(customerName);
+      setAccounts(accounts);
+    } catch (error) {
+      toast.error(error.response?.data?.message || error.message);
+      navigate("/");
+    }
+  };
   //Handle Transfer Logics
   const {
     transferForm, //Form data
@@ -26,31 +48,7 @@ function CustomerHome() {
     handleTransferReset, //For form reset
     handleTransferSubmit, //For form Submit
   } = AmountTransfer(accounts, navigate); //Calls the logic function
-
-  const [statementModal, setStatementModal] = useState({
-    show: false,
-    account: null,
-    transactions: [],
-  });
-
-  useEffect(() => {
-    fetchAccounts();
-  }, []);
-
-  const fetchAccounts = async () => {
-    try {
-      const response = await getCustomerAccounts();
-      console.log(response.data);
-      const { customerName, accounts } = response.data;
-      setCustomerName(customerName);
-      setAccounts(accounts);
-      console.log(accounts);
-    } catch (error) {
-      toast.error(error.response?.data?.message || error.message);
-      navigate("/");
-    }
-  };
-
+  
   const handleLogout = () => {
     localStorage.removeItem("authToken");
     localStorage.removeItem("customer");
@@ -60,15 +58,13 @@ function CustomerHome() {
 
   const handleViewStatement = async (account) => {
     try {
-      const response = await getAccountStatement(account.accountNumber);
-      console.log("Response", response);
+      const response = await getAccountStatement(account.accountNumber)
       setStatementModal({
         show: true,
         account: account,
         transactions: response.data, // backend returns array of transactions
       });
     } catch (error) {
-      console.log(error.response?.data?.message);
       toast.error(error.message || "Failed to load statement");
       console.error(error);
     }

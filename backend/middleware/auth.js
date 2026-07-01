@@ -36,7 +36,8 @@ export const customerAuthentication = async (req, res, next) => {
         }
         const token = authHeader.split(' ')[1];
         const decode = verifyToken(token);
-        req.body = decode;
+        req.customer = decode;
+        console.log(req.customer);
         // console.log(req);
         // console.log("Decode",decode);
         next();

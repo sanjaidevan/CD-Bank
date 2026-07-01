@@ -14,7 +14,8 @@ authRouter.post("/login", async (req, res, next) => {
         }
 
         const customer = await fetchCustomerById(customerID);
-        if (!customer) {
+        console.log(customer.isActive);
+        if (!customer || customer.isActive === "false") {
             return res.status(404).json({ message: "Customer not found" });
         }
 

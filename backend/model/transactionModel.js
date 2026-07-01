@@ -42,6 +42,14 @@ export const TransactionModel = sequelize.define("TransactionTable", {
             key: "accountNumber"
         }
     },
+    customerId:{
+        type:DataTypes.UUID,
+        allowNull:false,
+        references:{
+            model:"customerTable",
+            key:"id"
+        }
+    }
 }, {
     tableName: "transactionTable", //Table name Changed
 });
