@@ -1,9 +1,8 @@
 import { DataTypes } from "sequelize";
-import { sequelize } from "../config/dbConnect.js";
-
+import { sequelize } from "../db/config.js";
 
 export const CustomerModel = sequelize.define("CustomerTable", {
-    customer_id: {
+    id: {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
         primaryKey: true,
@@ -20,7 +19,7 @@ export const CustomerModel = sequelize.define("CustomerTable", {
         type: DataTypes.DATEONLY,
         allowNull: false
     },
-    email_id: {
+    email: {
         type: DataTypes.STRING(253),
         allowNull: false,
         unique: true,
@@ -40,11 +39,11 @@ export const CustomerModel = sequelize.define("CustomerTable", {
     },
 },
     {
-        tableName: "customer_tbl"
+        tableName: "customerTable"
     });
-    
+
 export async function createTableCustomer() {
-    await CustomerModel.sync({force:true});
+    await CustomerModel.sync({ force: true });
     console.log("Created Tables");
 }
 
