@@ -10,14 +10,7 @@ function TransferFund({
   submitting,
 }) {
 
-  const [myAccounts, setAccounts] = useState("");
-  useEffect(() => {
-    setAccounts({ accounts });
-  }, [accounts]);
-
-  const selectedSourceAccount = myAccounts?.accounts?.find(
-    (account) => account?.accountNumber === transferForm?.sourceAccountNumber,
-  );
+  console.log("Amount Input Check",transferForm.amount);
   return (
     <>
       <p className="sectionTitle">Transfer Funds</p>
@@ -43,11 +36,11 @@ function TransferFund({
                   </option>
                 ))}
               </Form.Select>
-              {selectedSourceAccount && (
+              {
                 <Form.Text className="text-muted my-5">
-                  Account Number: {selectedSourceAccount.accountNumber}
+                  Account Number: {transferForm.sourceAccountNumber}
                 </Form.Text>
-              )}
+              }
             </Col>
 
             {/* Beneficiary Account */}
@@ -68,7 +61,7 @@ function TransferFund({
                   .filter(
                     (account) =>
                       account.accountNumber !==
-                      transferForm.sourceAccountNumber,
+                      Number(transferForm.sourceAccountNumber),
                   )
                   .map((account) => (
                     <option

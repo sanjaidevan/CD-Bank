@@ -7,8 +7,6 @@ function CustomerLogin() {
   const navigate = useNavigate();
   const handleSubmit = async (formData) => {
     try {
-      // const response = await getCustomer(formData);
-      // localStorage.setItem("customerCredentials", JSON.stringify(formData));
       const response = await getCustomer(formData);
       const { token, customer } = response.data;
       localStorage.setItem("authToken", token);

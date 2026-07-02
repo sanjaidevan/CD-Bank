@@ -11,7 +11,7 @@ import {
 } from "react-bootstrap";
 import { useState } from "react";
 import logo from "../assets/CDlogo.png";
-import '../styles/CustomerLogin.css';
+import "../styles/CustomerLogin.css";
 
 function CustomerLoginForm({ onSubmit }) {
   const [formData, setFormData] = useState({
@@ -24,7 +24,6 @@ function CustomerLoginForm({ onSubmit }) {
       ...prev,
       [name]: value,
     }));
-    console.log(formData);
   };
   const handleSubmit = (event) => {
     event.preventDefault();

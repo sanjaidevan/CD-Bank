@@ -1,3 +1,4 @@
+import { where } from "sequelize";
 import { AccountModel } from "../model/accountModel.js";
 import { CustomerModel } from "../model/customerModel.js";
 import { TransactionModel } from "../model/transactionModel.js";
@@ -33,3 +34,7 @@ export const fetchCustomerAccount = async (number, customerID) => {
     const account = await AccountModel.findOne({ where: { accountNumber: number, customerId: customerID } });
     return account;
 };
+
+export const updateAccountBalance = async (number, newBalance) => {
+    const updatedBalance = await AccountModel.update({ balance: newBalance }, { where: { accountNumber: number } })
+}

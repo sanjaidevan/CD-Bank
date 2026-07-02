@@ -9,7 +9,7 @@ import {
 } from "../api/customerApi";
 import { validateTransferForm } from "../utils/validateTransfer";
 import AccountStatement from "../components/AccountStatement";
-import AmountTransfer from "./AmountTransfer";
+import useAmountTransfer from "./AmountTransfer";
 import TransferFund from "../components/TransferFund";
 import CustomerAccounts from "../components/CustomerAccounts";
 
@@ -18,17 +18,17 @@ function CustomerHome() {
   const [customerName, setCustomerName] = useState("");
   const [accounts, setAccounts] = useState([]);
   const [activeMenu, setActiveMenu] = useState("summary");
-  
+
   const [statementModal, setStatementModal] = useState({
     show: false,
     account: null,
     transactions: [],
   });
-  
+
   useEffect(() => {
-    fetchAccounts();
-  }, []);
-  
+    if (activeMenu === "summary") fetchAccounts();
+  }, [activeMenu]);
+
   const fetchAccounts = async () => {
     try {
       const response = await getCustomerAccounts();
@@ -47,8 +47,8 @@ function CustomerHome() {
     handleTransferChange, //When the form changes
     handleTransferReset, //For form reset
     handleTransferSubmit, //For form Submit
-  } = AmountTransfer(accounts, navigate); //Calls the logic function
-  
+  } = useAmountTransfer(accounts, navigate); //Calls the logic function
+
   const handleLogout = () => {
     localStorage.removeItem("authToken");
     localStorage.removeItem("customer");
@@ -58,7 +58,7 @@ function CustomerHome() {
 
   const handleViewStatement = async (account) => {
     try {
-      const response = await getAccountStatement(account.accountNumber)
+      const response = await getAccountStatement(account.accountNumber);
       setStatementModal({
         show: true,
         account: account,

@@ -3,7 +3,7 @@ import { validateTransferForm } from "../utils/validateTransfer";
 import { toast } from "react-toastify";
 import { transferFund } from "../api/customerApi";
 
-function AmountTransfer(accounts, navigate) {
+function useAmountTransfer(accounts, navigate) {
   //Create a Use State for transferfund default all the property value is null
   const [transferForm, setTransferForm] = useState({
     sourceAccountNumber: "",
@@ -11,9 +11,10 @@ function AmountTransfer(accounts, navigate) {
     amount: "",
     remarks: "",
   });
+
   useEffect(() => {
     setTransferForm({
-      sourceAccountNumber: accounts[0]?.accountNumber || "",
+      sourceAccountNumber: String(accounts[0]?.accountNumber) || "",
       beneficiaryAccountNumber: "",
       amount: "",
       remarks: "",
@@ -60,8 +61,8 @@ function AmountTransfer(accounts, navigate) {
     try {
       //Get the Customer Credentials from local Storage
       await transferFund({
-        accountNumber: parseInt(sourceAccountNumber),
-        reciverAccount: parseInt(beneficiaryAccountNumber),
+        accountNumber: Number(sourceAccountNumber),
+        receiverAccount: Number(beneficiaryAccountNumber),
         remarks: remarks || "",
         amountTransfer: parseFloat(amount),
       });
@@ -82,4 +83,4 @@ function AmountTransfer(accounts, navigate) {
   };
 }
 
-export default AmountTransfer;
+export default useAmountTransfer;

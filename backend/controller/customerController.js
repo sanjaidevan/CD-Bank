@@ -4,9 +4,9 @@ import {
     fetchLatestTransaction,
     fetchTransactions,
     newTransactionProcess,
+    updateAccountBalance,
 } from "../services/customerServices.js";
 import { randomUUID } from "crypto";
-import { validateFundTransferDetails } from "../utils/inputValidation.js";
 
 
 //Get Request Task Completed
@@ -48,15 +48,13 @@ export const getTransactions = async (req, res, next) => {
 export const amountTransfer = async (req, res, next) => {
     try {
         const { customerID } = req.customer;
-        const { accountNumber, reciverAccount, amountTransfer, remarks } = req.body;
-        const checkDatatype = validateFundTransferDetails(accountNumber, reciverAccount, amountTransfer);
-        if (checkDatatype === false) return res.status(422).json({ message: "Type error please check all the inputs" });
+        const { accountNumber, receiverAccount, amountTransfer, remarks } = req.transferData;
         const account = await fetchCustomerAccount(accountNumber, customerID);
         if (account.length == 0) return res.status(404).json({ message: "No accounts Found" });
         const newBalance = account.balance - amountTransfer;
+        const updateBalance = updateAccountBalance(account.accountNumber, newBalance);
         const newTransaction = { id: randomUUID(), description: remarks, closingBalance: newBalance, transferAmount: amountTransfer, accountNumber: account.accountNumber, transactionType: "debit", transactionStatus: "Completed", customerId: customerID }
         const transaction = await newTransactionProcess(newTransaction);
-        //Balance in Account is updated
         return res.status(200).json({ message: "Transaction successfully" });
     } catch (error) {
         next(error);
