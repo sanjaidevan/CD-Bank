@@ -14,7 +14,7 @@ vi.mock("../services/customerServices.js", () => ({
 
 const mockResponse = () => {
   return {
-    status: vi.fn().mockReturnThis(),
+    status: vi.fn(),
     json: vi.fn(),
   };
 };
@@ -189,5 +189,6 @@ describe("Customer Controller Unit Test", () => {
         remarks: "Check",
       },
     };
+    const res = mockResponse()
   });
 });
