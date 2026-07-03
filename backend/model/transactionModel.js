@@ -1,14 +1,13 @@
 import { DataTypes, DATE } from "sequelize";
-import { sequelize } from "../db/config.js";
+import { sequelize } from "../config/dbConnect.js";
 
 
 export const TransactionModel = sequelize.define("TransactionTable", {
-    id: {
-        type: DataTypes.UUID,
-        primaryKey: true,
-        defaultValue:DataTypes.UUID
+    transaction_id: {
+        type: DataTypes.STRING,
+        primaryKey: true
     },
-    transactionDate: {
+    transaction_date: {
         type: DataTypes.DATE,
         allowNull: false,
         defaultValue: DataTypes.NOW
@@ -16,40 +15,32 @@ export const TransactionModel = sequelize.define("TransactionTable", {
     description: {
         type: DataTypes.STRING,
     },
-    transactionType: {
+    transaction_type: {
         type: DataTypes.ENUM("debit", "credit"),
         allowNull: false
     },
-    transactionStatus: {
+    transaction_status: {
         type: DataTypes.ENUM("initiated", "pending", "completed", "failed"),
         allowNull: false,
-        defaultValue: "pending",
+        defaultValue:"completed",
     },
-    closingBalance:
+    balance:
     {
         type: DataTypes.INTEGER,
         allowNull: false
     },
-    transferAmount: { //Added amount transfer
-        type: DataTypes.FLOAT,
-        allowNull: false,
-    },
-    accountNumber: { //Added this column because as FK from acc_tbl,
+    amt_transfer: { //Added amount transfer
         type: DataTypes.INTEGER,
         allowNull: false,
-        references: {
-            model: "accountsTable",
-            key: "accountNumber"
+    },
+    acc_num: { //Added this column because as FK from acc_tbl,
+        type: DataTypes.INTEGER,
+        allowNull: false,
+        references:{
+            model:"acc_tbl",
+            key:"acc_num"
         }
     },
-    customerId:{
-        type:DataTypes.UUID,
-        allowNull:false,
-        references:{
-            model:"customerTable",
-            key:"id"
-        }
-    }
 }, {
-    tableName: "transactionTable", //Table name Changed
+    tableName: "transaction_tbl",
 });

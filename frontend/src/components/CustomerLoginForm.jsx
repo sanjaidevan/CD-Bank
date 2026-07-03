@@ -11,12 +11,11 @@ import {
 } from "react-bootstrap";
 import { useState } from "react";
 import logo from "../assets/CDlogo.png";
-import "../styles/CustomerLogin.css";
 
 function CustomerLoginForm({ onSubmit }) {
   const [formData, setFormData] = useState({
     customerID: "",
-    password: "",
+    customerpassword: "",
   });
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -24,10 +23,7 @@ function CustomerLoginForm({ onSubmit }) {
       ...prev,
       [name]: value,
     }));
-  };
-  const handleSubmit = (event) => {
-    event.preventDefault();
-    onSubmit(formData);
+    console.log(formData)
   };
   return (
     <Container fluid className="loginPage p-0">
@@ -49,7 +45,7 @@ function CustomerLoginForm({ onSubmit }) {
           <Card className="loginCard">
             <Card.Body>
               <p className="loginTitle">Login to your account</p>
-              <Form onSubmit={handleSubmit}>
+              <Form>
                 <FormGroup className="mb-4">
                   <FormLabel>Customer ID</FormLabel>
                   <FormControl
@@ -58,18 +54,16 @@ function CustomerLoginForm({ onSubmit }) {
                     name="customerID"
                     value={formData.customerID}
                     onChange={handleChange}
-                    required
                   />
                 </FormGroup>
                 <FormGroup className="mb-4">
                   <FormLabel>Password</FormLabel>
                   <FormControl
                     type="password"
-                    name="password"
+                    name="customerpassword"
                     placeholder=""
-                    value={formData.password}
+                    value={formData.customerpassword}
                     onChange={handleChange}
-                    required
                   />
                 </FormGroup>
                 <Button type="submit" className="loginBtn w-100">

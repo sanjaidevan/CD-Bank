@@ -1,7 +1,6 @@
 import bcrypt from "bcrypt";
 import { CustomerModel } from "../model/customerModel.js";
 
-
 const createCustomer = async (customers) => {
     await CustomerModel.bulkCreate(customers);
 }
@@ -13,7 +12,7 @@ export const sampleCustomers = async () => {
             firstName: "Arun",
             lastName: "Kumar",
             dob: "1995-03-15",
-            email: "arun.kumar@example.com",
+            email_id: "arun.kumar@example.com",
             mobile: "+919876543210",
             password: "password@123",
             isActive: "true"
@@ -22,7 +21,7 @@ export const sampleCustomers = async () => {
             firstName: "Priya",
             lastName: "Sharma",
             dob: "1998-07-21",
-            email: "priya.sharma@example.com",
+            email_id: "priya.sharma@example.com",
             mobile: "+919876543211",
             password: "password123@",
             isActive: "true"
@@ -31,7 +30,7 @@ export const sampleCustomers = async () => {
             firstName: "Rahul",
             lastName: "Verma",
             dob: "1992-11-05",
-            email: "rahul.verma@example.com",
+            email_id: "rahul.verma@example.com",
             mobile: "+919876543212",
             password: "123@password",
             isActive: "false"
@@ -40,7 +39,7 @@ export const sampleCustomers = async () => {
             firstName: "Sneha",
             lastName: "Reddy",
             dob: "1997-01-30",
-            email: "sneha.reddy@example.com",
+            email_id: "sneha.reddy@example.com",
             mobile: "+919876543213",
             password: "pass@word123",
             isActive: "true"
@@ -49,7 +48,7 @@ export const sampleCustomers = async () => {
             firstName: "Vikram",
             lastName: "Singh",
             dob: "1990-09-12",
-            email: "vikram.singh@example.com",
+            email_id: "vikram.singh@example.com",
             mobile: "+919876543214",
             password: "password1@23",
             isActive: "true"
@@ -58,7 +57,7 @@ export const sampleCustomers = async () => {
             firstName: "Anjali",
             lastName: "Patel",
             dob: "1996-04-18",
-            email: "anjali.patel@example.com",
+            email_id: "anjali.patel@example.com",
             mobile: "+919876543215",
             password: "wordpass123",
             isActive: "false"
@@ -67,7 +66,7 @@ export const sampleCustomers = async () => {
             firstName: "Karthik",
             lastName: "Narayan",
             dob: "1994-12-08",
-            email: "karthik.narayan@example.com",
+            email_id: "karthik.narayan@example.com",
             mobile: "+919876543216",
             password: "25password",
             isActive: "true"
@@ -76,7 +75,7 @@ export const sampleCustomers = async () => {
             firstName: "Meera",
             lastName: "Iyer",
             dob: "1999-06-25",
-            email: "meera.iyer@example.com",
+            email_id: "meera.iyer@example.com",
             mobile: "+919876543217",
             password: "1234password",
             isActive: "true"
@@ -85,7 +84,7 @@ export const sampleCustomers = async () => {
             firstName: "Suresh",
             lastName: "Babu",
             dob: "1991-08-14",
-            email: "suresh.babu@example.com",
+            email_id: "suresh.babu@example.com",
             mobile: "+919876543218",
             password: "pass@word123",
             isActive: "false"
@@ -94,7 +93,7 @@ export const sampleCustomers = async () => {
             firstName: "Divya",
             lastName: "Krishnan",
             dob: "1993-02-27",
-            email: "divya.krishnan@example.com",
+            email_id: "divya.krishnan@example.com",
             mobile: "+919876543219",
             password: "password@123",
             isActive: "true"
