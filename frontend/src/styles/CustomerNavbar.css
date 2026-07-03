@@ -1,0 +1,13 @@
+.customerNavbar{
+    height:75px;
+    background:#fff;
+}
+
+.navbarLogo{
+    width:200px;
+}
+
+.customerName{
+    font-weight:600;
+    color:#083949;
+}
