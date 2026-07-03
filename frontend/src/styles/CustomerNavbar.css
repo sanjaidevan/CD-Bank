@@ -1,13 +1,13 @@
-.customerNavbar {
-  height: 75px;
-  background: #fff;
+.customerNavbar{
+    height:75px;
+    background:#fff;
 }
 
-.navbarLogo {
-  width: 200px;
+.navbarLogo{
+    width:200px;
 }
 
-.customerName {
-  font-weight: 600;
-  color: #083949;
+.customerName{
+    font-weight:600;
+    color:#083949;
 }

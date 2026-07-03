@@ -1,3 +1,4 @@
+import { useEffect, useState } from "react";
 import { Col, Form, FormLabel, Row, Button } from "react-bootstrap";
 
 function TransferFund({
@@ -8,6 +9,8 @@ function TransferFund({
   onReset,
   submitting,
 }) {
+
+  console.log("Amount Input Check",transferForm.amount);
   return (
     <>
       <p className="sectionTitle">Transfer Funds</p>

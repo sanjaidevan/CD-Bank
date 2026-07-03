@@ -1,23 +1,22 @@
-.btn-statement {
-  background-color: #078baaff !important;
+.btn-statement{
+  background-color: #078BAAFF !important;
 }
 
-.accountHeader {
+.accountHeader{
   font-weight: bold;
 }
 
-.sideBar {
-  background: #f9fbfc !important;
+.sideBar{
+  background: #F9FBFC !important;
 }
-.balance {
-  color: #236fe8;
+.balance{
+  color: #236FE8;
 }
 
-.accordion,
-.accordion-item {
+.accordion,.accordion-item{
   border: none !important;
 }
-.accordion-button {
+.accordion-button{
   background-color: #fff !important;
 }
 
@@ -52,19 +51,19 @@
   overflow: visible;
 }
 
-.btn-close-statement {
+.btn-close-statement{
   position: absolute;
   top: -20px;
   right: -20px;
-  z-index: 2;
+  z-Index: 2;
   width: 40px;
   height: 40px;
   background: #fff;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.5);
 }
 
-textarea {
+textarea{
   resize: none !important;
 }
