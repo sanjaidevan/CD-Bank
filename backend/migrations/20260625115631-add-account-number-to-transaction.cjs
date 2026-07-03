@@ -5,14 +5,14 @@ module.exports = {
       allowNull: false,
       references: {
         model: "acc_tbl",
-        key: 'accountNumber'
+        key: "accountNumber",
       },
-      onUpdate: 'CASCADE',
-      onDelete: 'CASCADE'
-    })
+      onUpdate: "CASCADE",
+      onDelete: "CASCADE",
+    });
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.removeColumn('transaction_tbl', 'accountNumber');
-  }
+    await queryInterface.removeColumn("transaction_tbl", "accountNumber");
+  },
 };
