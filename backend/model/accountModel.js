@@ -1,12 +1,13 @@
 import { DataTypes } from "sequelize";
-import { sequelize } from "../db/config.js";
+import { sequelize } from "../config/dbConnect.js";
+
 
 export const AccountModel = sequelize.define("AccountTable", {
-    accountNumber: {
+    acc_num: {
         type: DataTypes.INTEGER,
         primaryKey: true,
     },
-    accountType: {
+    acc_type: {
         type: DataTypes.ENUM("savings", "current", "credit"),
         allowNull: false,
     },
@@ -14,23 +15,16 @@ export const AccountModel = sequelize.define("AccountTable", {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    ifsc: {
+    ifc: {
         type: DataTypes.STRING,
         allowNull: false,
     },
-    balance: {
-        type: DataTypes.FLOAT,
-        allowNull: false,
-    },
-    customerId: {
+    customer_id: {  // Added this column because of sqlMessage: "Field 'customer_id' doesn't have a default value",
+
         type: DataTypes.UUID,
         allowNull: false,
-        references: {
-            model: "customerTable",
-            key: "id"
-        },
     },
 },
     {
-        tableName: "accountsTable"
+        tableName: "acc_tbl"
     });

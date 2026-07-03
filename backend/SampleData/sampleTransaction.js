@@ -27,17 +27,18 @@ const createTransactions = async (transactions) => {
 
 export const sampleTransactions = async () => {
   const accounts = await AccountModel.findAll({
-    attributes: ["accountNumer"],
+    attributes: ["acc_num"],
     raw: true,
   });
 
   const transactions = [];
 
   for (const account of accounts) {
-    let currentBalance = account.balance
+    // Opening balance
+    let currentBalance = Math.floor(Math.random() * 90000) + 10000;
 
     // Generate 10 transactions for each account
-    for (let i = 0; i < 3; i++) {
+    for (let i = 0; i < 10; i++) {
       const transaction_type = Math.random() > 0.5 ? "credit" : "debit";
 
       const amt_transfer = Math.floor(Math.random() * 9000) + 500;
@@ -54,7 +55,7 @@ export const sampleTransactions = async () => {
       }
 
       transactions.push({
-        id: randomUUID(),
+        transaction_id: randomUUID(),
         acc_num: account.acc_num,
 
         transaction_date: new Date(
