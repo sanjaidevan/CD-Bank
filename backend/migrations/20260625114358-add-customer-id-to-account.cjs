@@ -1,4 +1,4 @@
-"use strict";
+'use strict';
 
 module.exports = {
   async up(queryInterface, Sequelize) {
@@ -7,14 +7,14 @@ module.exports = {
       allowNull: false,
       references: {
         model: "customer_tbl",
-        key: "customer_id",
+        key: 'customer_id'
       },
-      onUpdate: "CASCADE",
-      onDelete: "CASCADE",
-    });
+      onUpdate: 'CASCADE',
+      onDelete: 'CASCADE'
+    })
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.removeColumn("acc_tbl", "customer_id");
-  },
+    await queryInterface.removeColumn('acc_tbl', 'customer_id');
+  }
 };

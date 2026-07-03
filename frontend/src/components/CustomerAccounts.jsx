@@ -7,6 +7,8 @@ import {
   ListGroup,
   Accordion,
   Button,
+  Form,
+  FormLabel,
 } from "react-bootstrap";
 import CustomerNavbar from "./CustomerNavbar";
 
@@ -17,7 +19,7 @@ function CustomerAccounts({
   onMenuChange,
   onLogout,
   onViewStatement,
-  transferContent,
+  transferContent
 }) {
   return (
     <>
@@ -90,10 +92,7 @@ function CustomerAccounts({
                               <strong>IFSC :</strong> {account.ifsc}
                             </Col>
                             <Col className="text-end mt-2">
-                              <Button
-                                onClick={() => onViewStatement(account)}
-                                className="btn-statement"
-                              >
+                              <Button onClick={() => onViewStatement(account)} className="btn-statement">
                                 View Statement
                               </Button>
                             </Col>

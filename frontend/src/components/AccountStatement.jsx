@@ -3,7 +3,7 @@ import { Modal, Table, Button } from "react-bootstrap";
 function AccountStatement({ show, onClose, account, transactions }) {
   if (!account) return null;
 
-  return (
+  return ( 
     <Modal
       show={show}
       onHide={onClose}
