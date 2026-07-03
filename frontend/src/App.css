@@ -1,172 +1,69 @@
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+.btn-statement{
+  background-color: #078BAAFF !important;
 }
 
-.loginPage {
-  overflow: hidden;
+.accountHeader{
+  font-weight: bold;
 }
 
-/* LEFT SIDE */
-
-.leftSection {
-  background: #dff4f7;
-  position: relative;
-  display: flex;
-  align-items: center;
-  padding-left: 5%;
+.sideBar{
+  background: #F9FBFC !important;
+}
+.balance{
+  color: #236FE8;
 }
 
-.bankLogo {
-  position: absolute;
-  top: 40px;
-  left: 50px;
-  width: 20%;
+.accordion,.accordion-item{
+  border: none !important;
+}
+.accordion-button{
+  background-color: #fff !important;
 }
 
-.welcomeContainer {
-  padding-left: 170px;
-}
-
-.welcomeText {
-  font-size: 5rem;
-  font-weight: 700;
-  line-height: 1.05;
-  color: #003d4a;
-  margin: 0;
-}
-
-.welcomeText span {
-  color: #f37021;
-}
-
-/* RIGHT SIDE */
-
-.rightSection {
-  background: #f6f6f6;
-  display: flex;
-  align-items: center;
-  justify-content: start;
-}
-
-/* CARD */
-
-.loginCard {
-  width: 540px;
-  max-width: 90%;
-  border: none;
-  border-radius: 18px;
-  padding: 30px;
-  box-shadow: 0 12px 35px rgba(0, 0, 0, 0.08);* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
-}
-
-.loginForm {
-  background: #e5fcff;
-}
-
-.welcomeSection {
-  padding-left: 80px;
-}
-
-.welcomeText {
-  font-size: 4rem;
-  font-weight: 700;
-  line-height: 1.2;
-  color: #1f2937;
-}
-
-.welcomeText span {
-  color: #0d6efd;
-}
-
-.loginCard {
-  width: 100%;
-  max-width: 420px;
-  padding: 15px;
-  border: none;
-  border-radius: 16px;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
-}
-
-@media (max-width: 768px) {
-  .welcomeSection {
-    padding: 40px;
-    text-align: center;
-  }
-
-  .welcomeText {
-    font-size: 2.8rem;
-  }
-
-  .loginCard {
-    margin: 20px;
-  }
-}
-}
-
-.loginTitle {
-  color: #184d74;
+.list-group-item.menuItem {
+  font-size: large;
   font-weight: 600;
-  margin-bottom: 50px;
 }
 
-.form-label {
-  color: #184d74;
+.list-group-item.active.menuItem {
+  background-color: #fff;
+  color: #f37021;
+  border-color: #f37021;
+  border-inline-end: 5px solid #f37021;
+  border-bottom: none;
+  border-top: none;
+}
+
+.sectionTitle {
+  font-size: 1.5rem;
   font-weight: 500;
 }
 
-.form-control {
-  height: 54px;
-  border-radius: 4px;
-}
-
-.loginBtn {
-  background: #0087a8;
+.accountHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
   border: none;
-  height: 58px;
-  font-size: 1.1rem;
-  font-weight: 600;
 }
 
-.loginBtn:hover {
-  background: #007899;
+.statement-modal .modal-dialog {
+  overflow: visible;
 }
 
-/* RESPONSIVE */
-
-@media (max-width: 992px) {
-  .welcomeContainer {
-    padding: 60px;
-  }
-
-  .welcomeText {
-    font-size: 3.5rem;
-  }
-
-  .bankLogo {
-    left: 30px;
-  }
+.btn-close-statement{
+  position: absolute;
+  top: -20px;
+  right: -20px;
+  z-Index: 2;
+  width: 40px;
+  height: 40px;
+  background: #fff;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.5);
 }
 
-@media (max-width: 768px) {
-  .leftSection {
-    min-height: 40vh;
-  }
-
-  .welcomeContainer {
-    padding: 40px;
-  }
-
-  .welcomeText {
-    font-size: 3rem;
-  }
-
-  .loginCard {
-    margin: 30px 15px;
-  }
+textarea{
+  resize: none !important;
 }

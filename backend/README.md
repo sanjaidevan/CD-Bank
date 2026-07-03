@@ -49,8 +49,8 @@ The Account model stores banking account information associated with customers.
 
 | Field      | Type                                  | Description                                     |
 | ---------- | ------------------------------------- | ----------------------------------------------- |
-| `acc_num`  | Integer                               | Unique account number and primary key.          |
-| `acc_type` | Enum (`savings`, `current`, `credit`) | Type of bank account.                           |
+| `accountNumber`  | Integer                               | Unique account number and primary key.          |
+| `accountType` | Enum (`savings`, `current`, `credit`) | Type of bank account.                           |
 | `branch`   | String                                | Branch where the account is maintained.         |
 | `ifc`      | String                                | IFSC/branch code used for banking transactions. |
 
@@ -81,7 +81,7 @@ The Transaction model records all financial activities performed on customer acc
 | Field                | Type                                                 | Description                                                                 |
 | -------------------- | ---------------------------------------------------- | --------------------------------------------------------------------------- |
 | `transaction_id`     | String                                               | Unique transaction identifier and primary key.                              |
-| `transaction_date`   | DateTime                                             | Date and time when the transaction occurred. Defaults to current timestamp. |
+| `transactionDate`   | DateTime                                             | Date and time when the transaction occurred. Defaults to current timestamp. |
 | `description`        | String                                               | Optional description or remarks about the transaction.                      |
 | `transaction_type`   | Enum (`debit`, `credit`)                             | Specifies whether money was withdrawn or deposited.                         |
 | `transaction_status` | Enum (`initiated`, `pending`, `completed`, `failed`) | Current state of the transaction.                                           |
@@ -162,13 +162,13 @@ A **one-to-many (1:N)** relationship exists between accounts and transactions.
 
 ```javascript
 AccountModel.hasMany(TransactionModel, {
-    foreignKey: "acc_num",
+    foreignKey: "accountNumber",
     as: "transaction",
     onDelete: "CASCADE",
 });
 
 TransactionModel.belongsTo(AccountModel, {
-    foreignKey: "acc_num",
+    foreignKey: "accountNumber",
     as: "account",
 });
 ```
@@ -177,7 +177,7 @@ TransactionModel.belongsTo(AccountModel, {
 
 * A single account can have multiple transactions.
 * Each transaction belongs to exactly one account.
-* The `acc_num` field acts as the foreign key in the `transaction_tbl` table.
+* The `accountNumber` field acts as the foreign key in the `transaction_tbl` table.
 * The alias `transaction` provides access to all transactions related to an account.
 * The alias `account` provides access to the account details associated with a transaction.
 * `CASCADE` deletion ensures that when an account is deleted, all associated transactions are automatically removed.
@@ -220,7 +220,7 @@ Customer
 | Parent Model | Child Model | Relationship | Foreign Key   |
 | ------------ | ----------- | ------------ | ------------- |
 | Customer     | Account     | One-to-Many  | `customer_id` |
-| Account      | Transaction | One-to-Many  | `acc_num`     |
+| Account      | Transaction | One-to-Many  | `accountNumber`     |
 
 ### Benefits of These Associations
 
