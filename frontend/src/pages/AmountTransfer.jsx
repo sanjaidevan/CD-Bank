@@ -1,9 +1,9 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { validateTransferForm } from "../utils/validateTransfer";
 import { toast } from "react-toastify";
 import { transferFund } from "../api/customerApi";
 
-function useAmountTransfer(accounts, navigate) {
+function useAmountTransfer(accounts) {
   //Create a Use State for transferfund default all the property value is null
   const [transferForm, setTransferForm] = useState({
     sourceAccountNumber: "",
@@ -13,12 +13,15 @@ function useAmountTransfer(accounts, navigate) {
   });
 
   useEffect(() => {
-    setTransferForm({
-      sourceAccountNumber: String(accounts[0]?.accountNumber) || "",
-      beneficiaryAccountNumber: "",
-      amount: "",
-      remarks: "",
-    });
+    const setTransferFormData = () => {
+      setTransferForm({
+        sourceAccountNumber: String(accounts[0]?.accountNumber) || "",
+        beneficiaryAccountNumber: "",
+        amount: "",
+        remarks: "",
+      });
+    };
+    setTransferFormData();
   }, [accounts]);
 
   //Another useSate that for check the submitting by default it set as false

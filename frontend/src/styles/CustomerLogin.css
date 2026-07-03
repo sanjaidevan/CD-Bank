@@ -112,7 +112,7 @@
 
 .loginTitle {
   color: #184d74;
-  font-weight:  800;
+  font-weight: 800;
   margin-bottom: 30px; /* Changed margin-bottom */
 }
 
@@ -127,7 +127,7 @@
 }
 
 .loginBtn {
-  background: #078BAAFF !important;
+  background: #078baaff !important;
   border: none;
   height: 58px;
   font-size: 1.1rem;

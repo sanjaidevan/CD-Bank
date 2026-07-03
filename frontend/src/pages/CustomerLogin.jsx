@@ -12,7 +12,7 @@ function CustomerLogin() {
       localStorage.setItem("authToken", token);
       localStorage.setItem("customer", JSON.stringify(customer));
       toast.success("Login Successfull");
-      navigate("/customer",{replace:true});
+      navigate("/customer", { replace: true });
     } catch (error) {
       toast.error(error.message);
       console.error(error);

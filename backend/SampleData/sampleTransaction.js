@@ -34,7 +34,7 @@ export const sampleTransactions = async () => {
   const transactions = [];
 
   for (const account of accounts) {
-    let currentBalance = account.balance
+    let currentBalance = account.balance;
 
     // Generate 10 transactions for each account
     for (let i = 0; i < 3; i++) {
@@ -57,15 +57,11 @@ export const sampleTransactions = async () => {
         id: randomUUID(),
         acc_num: account.acc_num,
 
-        transaction_date: new Date(
-          Date.now() - (10 - i) * 24 * 60 * 60 * 1000
-        ),
+        transaction_date: new Date(Date.now() - (10 - i) * 24 * 60 * 60 * 1000),
 
         description:
           descriptions[transaction_type][
-          Math.floor(
-            Math.random() * descriptions[transaction_type].length
-          )
+            Math.floor(Math.random() * descriptions[transaction_type].length)
           ],
 
         transaction_type,
