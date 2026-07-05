@@ -38,7 +38,7 @@ function AccountStatement({ show, onClose, account, transactions }) {
           </thead>
           <tbody>
             {transactions.map((txn) => {
-              const isCredit = txn.transaction_type === "credit";
+              const isCredit = txn.transactionType === "credit";
               const formattedAmount = isCredit
                 ? `+${txn.transferAmount}`
                 : `-${txn.transferAmount}`;

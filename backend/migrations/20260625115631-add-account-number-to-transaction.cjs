@@ -4,7 +4,7 @@ module.exports = {
       type: Sequelize.INTEGER,
       allowNull: false,
       references: {
-        model: "acc_tbl",
+        model: "accountTable",
         key: 'accountNumber'
       },
       onUpdate: 'CASCADE',

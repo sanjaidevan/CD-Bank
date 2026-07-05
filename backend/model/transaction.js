@@ -34,7 +34,7 @@ export const TransactionModel = sequelize.define("TransactionTable", {
         type: DataTypes.FLOAT,
         allowNull: false,
     },
-    accountNumber: { //Added this column because as FK from acc_tbl,
+    accountNumber: { 
         type: DataTypes.INTEGER,
         allowNull: false,
         references: {

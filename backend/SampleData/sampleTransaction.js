@@ -38,42 +38,42 @@ export const sampleTransactions = async () => {
 
     // Generate 10 transactions for each account
     for (let i = 0; i < 3; i++) {
-      const transaction_type = Math.random() > 0.5 ? "credit" : "debit";
+      const transactionType = Math.random() > 0.5 ? "credit" : "debit";
 
-      const amt_transfer = Math.floor(Math.random() * 9000) + 500;
+      const transferAmount = Math.floor(Math.random() * 9000) + 500;
 
       // Prevent negative balance
-      if (transaction_type === "debit" && currentBalance < amt_transfer) {
-        currentBalance += amt_transfer;
+      if (transactionType === "debit" && currentBalance < transferAmount) {
+        currentBalance += transferAmount;
       }
 
-      if (transaction_type === "credit") {
-        currentBalance += amt_transfer;
+      if (transactionType === "credit") {
+        currentBalance += transferAmount;
       } else {
-        currentBalance -= amt_transfer;
+        currentBalance -= transferAmount;
       }
 
       transactions.push({
         id: randomUUID(),
-        acc_num: account.acc_num,
+        accountNumber: account.accountNumber,
 
-        transaction_date: new Date(
+        transactionDate: new Date(
           Date.now() - (10 - i) * 24 * 60 * 60 * 1000
         ),
 
         description:
-          descriptions[transaction_type][
+          descriptions[transactionType][
           Math.floor(
-            Math.random() * descriptions[transaction_type].length
+            Math.random() * descriptions[transactionType].length
           )
           ],
 
-        transaction_type,
+        transactionType,
 
-        transaction_status:
+        transactionStatus:
           statuses[Math.floor(Math.random() * statuses.length)],
 
-        amt_transfer,
+        transferAmount,
 
         // Closing balance after this transaction
         balance: currentBalance,
