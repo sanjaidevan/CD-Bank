@@ -47,7 +47,7 @@ function CustomerHome() {
     handleTransferChange, //When the form changes
     handleTransferReset, //For form reset
     handleTransferSubmit, //For form Submit
-  } = useAmountTransfer(accounts, navigate); //Calls the logic function
+  } = useAmountTransfer(accounts); //Calls the logic function
 
   const handleLogout = () => {
     localStorage.removeItem("authToken");
