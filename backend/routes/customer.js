@@ -1,6 +1,6 @@
 import express from "express";
 import { customerAuthentication } from "../middleware/auth.js";
-import { amountTransfer, getAccountDetails, getTransactions, getUser } from "../controller/customerController.js";
+import { amountTransfer, getAccountDetails, getTransactions, getUser } from "../controller/customer.js";
 import { validateTransferFundDetails } from "../middleware/inputValidation.js";
 
 

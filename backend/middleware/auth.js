@@ -1,4 +1,4 @@
-import { fetchCustomerById } from "../services/customerServices.js";
+import { fetchCustomerById } from "../services/customer.js";
 import bcrypt from "bcrypt";
 import { verifyToken } from "../utils/jwt.js";
 

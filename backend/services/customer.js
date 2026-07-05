@@ -1,7 +1,7 @@
 import { where } from "sequelize";
-import { AccountModel } from "../model/accountModel.js";
-import { CustomerModel } from "../model/customerModel.js";
-import { TransactionModel } from "../model/transactionModel.js";
+import { AccountModel } from "../model/account.js";
+import { CustomerModel } from "../model/customer.js";
+import { TransactionModel } from "../model/transaction.js";
 
 
 

@@ -1,8 +1,8 @@
 import {
   getAccountDetails,
   getTransactions,
-} from "../controller/customerController.js";
-import * as customerServices from "../services/customerServices.js";
+} from "../controller/customer.js";
+import * as customerServices from "../services/customer.js";
 
 vi.mock("../services/customerServices.js", () => ({
   fetchCustomerAccounts: vi.fn(),

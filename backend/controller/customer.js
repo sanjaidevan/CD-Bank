@@ -5,7 +5,7 @@ import {
     fetchTransactions,
     newTransactionProcess,
     updateAccountBalance,
-} from "../services/customerServices.js";
+} from "../services/customer.js";
 import { randomUUID } from "crypto";
 
 
