@@ -5,7 +5,7 @@ import { TransactionModel } from "../model/transactionModel.js";
 
 
 
-export const fetchCustomerById = async (customerID) => { //name change from getCustomerById to fetchCustomerById
+export const fetchCustomerById = async (customerID) => { 
     const customer = await CustomerModel.findOne({ where: { email: customerID } });
     return customer;
 };
