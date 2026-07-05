@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { validateTransferForm } from "../utils/validateTransfer";
 import { toast } from "react-toastify";
 import { transferFund } from "../api/customerApi";

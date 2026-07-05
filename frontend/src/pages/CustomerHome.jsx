@@ -9,7 +9,7 @@ import {
 } from "../api/customerApi";
 import { validateTransferForm } from "../utils/validateTransfer";
 import AccountStatement from "../components/AccountStatement";
-import useAmountTransfer from "./AmountTransfer";
+import useAmountTransfer from "../hook/AmountTransfer";
 import TransferFund from "../components/TransferFund";
 import CustomerAccounts from "../components/CustomerAccounts";
 
