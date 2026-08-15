@@ -1,14 +1,14 @@
-import { CustomerModel } from "./model/customerModel.js";
-import { AccountModel } from "./model/accountModel.js";
-import { TransactionModel } from "./model/transactionModel.js";
+import { CustomerModel } from "./model/customer.js";
+import { AccountModel } from "./model/account.js";
+import { TransactionModel } from "./model/transaction.js";
 
 CustomerModel.hasMany(AccountModel, {
-    foreignKey: "customer_id",
+    foreignKey: "customerId",
     as: "accounts",
     onDelete: "CASCADE",
 });
 AccountModel.belongsTo(CustomerModel, {
-    foreignKey: "customer_id",
+    foreignKey: "customerId",
     as: "customer",
 });
 

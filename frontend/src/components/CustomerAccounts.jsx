@@ -1,4 +1,3 @@
-// components/acc_num.jsx
 import {
   Container,
   Row,
@@ -7,8 +6,6 @@ import {
   ListGroup,
   Accordion,
   Button,
-  Form,
-  FormLabel,
 } from "react-bootstrap";
 import CustomerNavbar from "./CustomerNavbar";
 

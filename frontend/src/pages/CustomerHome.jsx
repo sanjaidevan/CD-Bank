@@ -1,15 +1,9 @@
-// CustomerHome.jsx
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import {
-  getCustomerAccounts,
-  transferFund,
-  getAccountStatement,
-} from "../api/customerApi";
-import { validateTransferForm } from "../utils/validateTransfer";
+import { getCustomerAccounts, getAccountStatement } from "../api/customerApi";
 import AccountStatement from "../components/AccountStatement";
-import useAmountTransfer from "./AmountTransfer";
+import useAmountTransfer from "../hook/AmountTransfer";
 import TransferFund from "../components/TransferFund";
 import CustomerAccounts from "../components/CustomerAccounts";
 
@@ -26,20 +20,19 @@ function CustomerHome() {
   });
 
   useEffect(() => {
+    const fetchAccounts = async () => {
+      try {
+        const response = await getCustomerAccounts();
+        const { customerName, accounts } = response.data;
+        setCustomerName(customerName);
+        setAccounts(accounts);
+      } catch (error) {
+        toast.error(error.response?.data?.message || error.message);
+      }
+    };
     if (activeMenu === "summary") fetchAccounts();
   }, [activeMenu]);
 
-  const fetchAccounts = async () => {
-    try {
-      const response = await getCustomerAccounts();
-      const { customerName, accounts } = response.data;
-      setCustomerName(customerName);
-      setAccounts(accounts);
-    } catch (error) {
-      toast.error(error.response?.data?.message || error.message);
-      navigate("/");
-    }
-  };
   //Handle Transfer Logics
   const {
     transferForm, //Form data
@@ -47,7 +40,7 @@ function CustomerHome() {
     handleTransferChange, //When the form changes
     handleTransferReset, //For form reset
     handleTransferSubmit, //For form Submit
-  } = useAmountTransfer(accounts, navigate); //Calls the logic function
+  } = useAmountTransfer(accounts); //Calls the logic function
 
   const handleLogout = () => {
     localStorage.removeItem("authToken");

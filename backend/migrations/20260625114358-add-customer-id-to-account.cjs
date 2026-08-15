@@ -2,12 +2,12 @@
 
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.addColumn("acc_tbl", "customer_id", {
+    await queryInterface.addColumn("accountTable", "customerId", {
       type: Sequelize.UUID,
       allowNull: false,
       references: {
-        model: "customer_tbl",
-        key: 'customer_id'
+        model: "customerTable",
+        key: 'customerId'
       },
       onUpdate: 'CASCADE',
       onDelete: 'CASCADE'
@@ -15,6 +15,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.removeColumn('acc_tbl', 'customer_id');
+    await queryInterface.removeColumn('accountTable', 'customerId');
   }
 };

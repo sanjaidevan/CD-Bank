@@ -1,6 +1,6 @@
 import express from "express";
 import { signToken } from "../utils/jwt.js";
-import { fetchCustomerById } from "../services/customerServices.js";
+import { fetchCustomerById } from "../services/customer.js";
 import bcrypt from 'bcrypt';
 
 

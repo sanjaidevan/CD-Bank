@@ -1,10 +1,10 @@
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.addColumn("transaction_tbl", "accountNumber", {
+    await queryInterface.addColumn("transactionTable", "accountNumber", {
       type: Sequelize.INTEGER,
       allowNull: false,
       references: {
-        model: "acc_tbl",
+        model: "accountTable",
         key: 'accountNumber'
       },
       onUpdate: 'CASCADE',
@@ -13,6 +13,6 @@ module.exports = {
   },
 
   async down(queryInterface, Sequelize) {
-    await queryInterface.removeColumn('transaction_tbl', 'accountNumber');
+    await queryInterface.removeColumn('transactionTable', 'accountNumber');
   }
 };

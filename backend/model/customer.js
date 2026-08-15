@@ -42,8 +42,3 @@ export const CustomerModel = sequelize.define("CustomerTable", {
         tableName: "customerTable"
     });
 
-export async function createTableCustomer() {
-    await CustomerModel.sync({ force: true });
-    console.log("Created Tables");
-}
-
